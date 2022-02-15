@@ -5,30 +5,30 @@ sys.stdin = open('input.txt')
 T = 10
 
 
+# 높이 리스트 최댓값, 최댓값 인덱스 구하는 함수
+def max_def(lst):
+    max_num = 0
+    max_idx = 0
+    for i in range(len(lst)):
+        if lst[i] >= max_num:
+            max_num = lst[i]
+            max_idx = i
+    return max_num, max_idx
+
+# 높이 리스트 최솟값, 최솟값 인덱스 구하는 함수
+def min_def(lst):
+    min_num = 100
+    min_idx = 0
+    for i in range(len(lst)):
+        if lst[i] <= min_num:
+            min_num = lst[i]
+            min_idx = i
+    return min_num, min_idx
+
 for tc in range(1, T + 1):
     # 덤프 횟수 / 높이 리스트 입력
     dump_num = int(input())
     high_lst = list(map(int, input().split()))
-
-    # 높이 리스트 최댓값, 최댓값 인덱스 구하는 함수
-    def max_def(lst):
-        max_num = 0
-        max_idx = 0
-        for i in range(len(lst)):
-            if lst[i] >= max_num:
-                max_num = lst[i]
-                max_idx = i
-        return max_num, max_idx
-
-    # 높이 리스트 최솟값, 최솟값 인덱스 구하는 함수
-    def min_def(lst):
-        min_num = 100
-        min_idx = 0
-        for i in range(len(lst)):
-            if lst[i] <= min_num:
-                min_num = lst[i]
-                min_idx = i
-        return min_num, min_idx
 
     # 덤프 횟수 만큼 진행
     for _ in range(dump_num):

@@ -12,7 +12,7 @@ def find_idx(ladder,start_num):
     # 행이 1일때 까지 반복
     while row > 0:
         # 열을 세 개로 분리해준 이유 : 인덱스 에러를 막기 위해
-        # 만약 열이 0과 99 사이라면
+        # 만약 열이 1과 98 사이라면
         if 1 < start_num < 98:
             # 양 옆을 확인해 1이 있는 쪽으로 열을 옮겨준다.
             if ladder[row][start_num + 1] == 1:
@@ -41,12 +41,13 @@ def find_idx(ladder,start_num):
                 while ladder[row][start_num+1] == 1:
                     start_num += 1
                     num += 1
-        # 만약 열이 99이라면 오른쪽 열들만 확인해줌
+        # 만약 열이 99이라면 왼쪽 열들만 확인해줌
         elif start_num == 99:
             if ladder[row][start_num-1] == 1:
                 while ladder[row][start_num-1] == 1:
                     start_num -= 1
                     num += 1
+        # 올라가기
         row -=1
     return num, start_num
 
@@ -60,17 +61,19 @@ for tc in range(1, T + 1):
         arr = list(map(int, input().split()))
         ladder.append(arr)
 
-    # 마지막 줄에서 정답이 되는 '2'의 인덱스를 찾는다
+    # 마지막 줄에 1인 요소들의 인덱스를 찾아 그것만 돈다.
     line_idx = []
     for i in range(100):
         if ladder[99][i] == 1:
             line_idx.append(i)
 
-    # 함수 이용
+    # 함수 이용해 이동값과 인덱스를 셋으로 받아준다.
     result = []
     for i in line_idx:
         result.append(find_idx(ladder, i))
 
+    # 최솟값 구하기
+    print(result) # 삭제예정
     min = result[0][0]
     min_idx = result[0][1]
     for i in range(len(result)):
