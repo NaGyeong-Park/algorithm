@@ -22,7 +22,6 @@ def find_laser(lst):
                         l_cnt -= 1
                 elif lst[j] == '(':
                     l_cnt +=1
-
     return sum
 
 for tc in range(1, T + 1):

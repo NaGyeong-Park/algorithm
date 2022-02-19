@@ -4,20 +4,19 @@ sys.stdin = open('input.txt')
 
 T = int(input())
 
-def find_best_killer(lst,num):
+def find_best_killer(lst,M,N):
     sum = 0
     max = 0
-    turn_num = len(lst)-num+1+1
-    for _ in range(num*num):
-        for r in range(num):
-            for c in range(num):
-
-                sum = lst[r][c:c+num]
-                sum2 = lst[r+num][c:c+num]
-                print(sum)
-            print('--')
-
-
+    repeat_num = N - M + 1
+    for i in range(repeat_num):
+        for j in range(repeat_num):
+            sum = 0
+            for ii in range(i,M+i):
+                for jj in range(j,j+M):
+                    sum += lst[ii][jj]
+            if max < sum:
+                max = sum
+    return max
 
 for tc in range(1, T + 1):
     N, M = map(int, input().split())
@@ -27,9 +26,6 @@ for tc in range(1, T + 1):
         row = list(map(int,input().split()))
         for j in row:
             matrix[i].append(j)
-    print(matrix)
-    find_best_killer(matrix,M)
-
-    print(matrix)
-    print(f'#{tc} ')
+    result = find_best_killer(matrix,M,N)
+    print(f'#{tc} {result}')
 
