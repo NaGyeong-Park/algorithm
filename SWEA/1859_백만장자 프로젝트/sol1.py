@@ -49,6 +49,6 @@ for tc in range(1, T + 1):
 
     # 함수 대입해 총계 값 구하기
     result = i_wanna_rich(market_info)
-    #출력
+    # 출력
     print(f'#{tc} {result}')
 
