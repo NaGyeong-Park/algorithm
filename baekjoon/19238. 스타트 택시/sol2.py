@@ -1,24 +1,21 @@
 import sys
 from collections import deque
+
 sys.stdin = open('input.txt')
 from pprint import pprint
+
 T = 4
 
-
-
-
-
-
 for tc in range(1, T + 1):
-    
+
     print(f'#{tc} ')
     # 초기 입력 받기
-    N,M,F = map(int,input().split())
+    N, M, F = map(int, input().split())
     lst = [0 for _ in range(N)]
     # 벽 확인 리스트, 거리 세는 리스트, xy좌표 리스트
     cheak_lst = [[False for _ in range(N)] for _ in range(N)]
-    find_x = [1,0,-1,0]
-    find_y = [0,1,0,-1]
+    find_x = [1, 0, -1, 0]
+    find_y = [0, 1, 0, -1]
 
     # map 입력받기
     for i in range(N):
@@ -27,12 +24,11 @@ for tc in range(1, T + 1):
             if lst[i][j] == 1:
                 cheak_lst[i][j] = True
     # 택시위치, 사람들 위치 입력받기 / 인덱스값으로 맞추기위해 1씩 빼줌
-    people = [0 for _ in range(M+1)]
-    for i in range(M+1):
+    people = [0 for _ in range(M + 1)]
+    for i in range(M + 1):
         people[i] = list(map(int, sys.stdin.readline().split()))
-        for k in people[i]:
-            k -= 1
-
+        for k in range(len(people[i])):
+            people[i][k] -= 1
     # M명이니까 M번 반복
     for _ in range(M):
         def BFS():
@@ -46,13 +42,9 @@ for tc in range(1, T + 1):
                     if 0 <= now_x < N and 0 <= now_y < N:
                         if cheak_lst[now_x][now_y] == False and cnt_lst[now_x][now_y] == 0:
                             queue.append([now_x, now_y])
-                            print(cnt_lst)
-                            print(now_x,now_y)
-                            print(N)
                             cnt_lst[now_x][now_y] = cnt_lst[x][y] + 1
             cnt_lst[people[0][0]][people[0][1]] = 0
             return cnt_lst
-
 
 
         def find_short():
@@ -81,7 +73,7 @@ for tc in range(1, T + 1):
 
             for i in range(1, M + 1):
                 if people[i][:2] == people[0]:
-                    end = people[i][2:4]
+                    end = people[i][2:]
                     people[i] = [False, False]
             if cnt_error == M:
                 if M == 1:
@@ -90,6 +82,8 @@ for tc in range(1, T + 1):
                     print(-1)
                     exit(0)
             return min_val, people, end
+
+
         cnt_lst = BFS()
         min_val, people, end = find_short()
         F -= min_val
@@ -101,13 +95,13 @@ for tc in range(1, T + 1):
                 cnt_lst = BFS()
                 distance = cnt_lst[end[0]][end[1]]
             except IndexError:
-                print(end[0],end[1])
+                print(end[0], end[1])
 
             F -= distance
             if F < 0:
                 print(-1)
                 exit(0)
-            F += distance*2
-            people[0] = [end[0],end[1]]
+            F += distance * 2
+            people[0] = [end[0], end[1]]
 
     print(F)
