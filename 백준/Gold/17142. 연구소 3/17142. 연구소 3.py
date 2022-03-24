@@ -1,6 +1,10 @@
+import sys
+
+sys.stdin = open('input.txt')
 from itertools import combinations
 from collections import deque
 import copy
+T = int(input())
 
 def BFS():
     # 바이러스 조합 다 돌기
@@ -43,36 +47,39 @@ def BFS():
         if result_now != -1:
             result.append(result_now)
 
-# N, M, cheak_lst, map_lst, virus 위치(위치 입력시 그 위치 map에서 0으로 바꿔줌), 상하좌우 리스트, 결과값 리스트 입력
-N, M = map(int, input().split())
-cheak_lst = [[True for _ in range(N)] for _ in range(N)]
-map_lst = [0]*N
-virus = []
-result = []
-direc_x = [1,-1,0,0]
-direc_y = [0,0,1,-1]
-# map 입력받기
-for i in range(N):
-    map_lst[i] = list(map(int, input().split()))
-    for j in range(N):
-        # 벽이면 cheak_lst에 False로 표시해주고, map에 -1로 해주기
-        # -1로 하는 이유는 바이러스 놓자마자 퍼지는 상황 대비!(벽이 1이므로 시간이 1로 나옴)
-        if map_lst[i][j] == 1:
-            cheak_lst[i][j] = False
-            map_lst[i][j] = -1
-        # 2는 바이러스 좌표 리스트에 넣어주고, map에서는 0으로 표기
-        elif map_lst[i][j] == 2:
-            virus.append([i,j])
-            map_lst[i][j] = 0
-# 바이러스 M개를 놓을 수 있는 조합
-virus_lst = list(combinations(virus, M))
 
-# BFS
-BFS()
+for tc in range(1, T + 1):
+    print(f'#{tc} ', end='')
+    # N, M, cheak_lst, map_lst, virus 위치(위치 입력시 그 위치 map에서 0으로 바꿔줌), 상하좌우 리스트, 결과값 리스트 입력
+    N, M = map(int, input().split())
+    cheak_lst = [[True for _ in range(N)] for _ in range(N)]
+    map_lst = [0]*N
+    virus = []
+    result = []
+    direc_x = [1,-1,0,0]
+    direc_y = [0,0,1,-1]
+    # map 입력받기
+    for i in range(N):
+        map_lst[i] = list(map(int, input().split()))
+        for j in range(N):
+            # 벽이면 cheak_lst에 False로 표시해주고, map에 -1로 해주기
+            # -1로 하는 이유는 바이러스 놓자마자 퍼지는 상황 대비!(벽이 1이므로 시간이 1로 나옴)
+            if map_lst[i][j] == 1:
+                cheak_lst[i][j] = False
+                map_lst[i][j] = -1
+            # 2는 바이러스 좌표 리스트에 넣어주고, map에서는 0으로 표기
+            elif map_lst[i][j] == 2:
+                virus.append([i,j])
+                map_lst[i][j] = 0
+    # 바이러스 M개를 놓을 수 있는 조합
+    virus_lst = list(combinations(virus, M))
 
-# 만약 result 리스트가 비었으면 바이러스 퍼질 수 없음
-# 아니면 최소시간 출력
-if len(result) == 0:
-    print(-1)
-else:
-    print(min(result))
+    # BFS
+    BFS()
+
+    # 만약 result 리스트가 비었으면 바이러스 퍼질 수 없음
+    # 아니면 최소시간 출력
+    if len(result) == 0:
+        print(-1)
+    else:
+        print(min(result))
