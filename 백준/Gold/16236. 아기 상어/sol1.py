@@ -1,4 +1,12 @@
+import sys
 from collections import deque
+sys.stdin = open('input.txt')
+
+T = int(input())
+
+
+
+
 
 def BFS():
     global baby_size, time, baby, temp
@@ -38,41 +46,43 @@ def BFS():
         return 1
     return 0
 
+for tc in range(1, T + 1):
+    print(f'#{tc} ',end='')
 
-N = int(input())
-map_lst = [[0] for _ in range(N)]
-fish = []
-for i in range(N):
-    map_lst[i] = list(map(int, input().split()))
-    for j in range(N):
-        if map_lst[i][j] == 9:
-            baby = [i,map_lst[i].index(9)]
-            map_lst[baby[0]][baby[1]] = 0
-        elif map_lst[i][j] > 0:
-            fish.append([i,j])
-direc_x = [-1, 1, 0, 0]
-direc_y = [0, 0, -1, 1]
-baby_size = 2
-end_cnt = 0
-time = 0
-temp = 0
-
-while fish:
-    cheak_fish = []
+    N = int(input())
+    map_lst = [[0] for _ in range(N)]
+    fish = []
+    for i in range(N):
+        map_lst[i] = list(map(int, input().split()))
+        for j in range(N):
+            if map_lst[i][j] == 9:
+                baby = [i,map_lst[i].index(9)]
+                map_lst[baby[0]][baby[1]] = 0
+            elif map_lst[i][j] > 0:
+                fish.append([i,j])
+    direc_x = [-1, 1, 0, 0]
+    direc_y = [0, 0, -1, 1]
+    baby_size = 2
     end_cnt = 0
-    visited = [[False] * N for _ in range(N)]
-    for f in fish:
-        if map_lst[f[0]][f[1]] > baby_size:
-            visited[f[0]][f[1]] = True
-            end_cnt += 1
-        elif map_lst[f[0]][f[1]] != 0 and map_lst[f[0]][f[1]] < baby_size:
-            cheak_fish.append(f)
-        else:
-            end_cnt += 1
-    if end_cnt == len(fish):
-        break
-    bfs_lst = [[0] * N for _ in range(N)]
-    result = BFS()
-    if result == 0:
-        break
-print(time)
+    time = 0
+    temp = 0
+
+    while fish:
+        cheak_fish = []
+        end_cnt = 0
+        visited = [[False] * N for _ in range(N)]
+        for f in fish:
+            if map_lst[f[0]][f[1]] > baby_size:
+                visited[f[0]][f[1]] = True
+                end_cnt += 1
+            elif map_lst[f[0]][f[1]] != 0 and map_lst[f[0]][f[1]] < baby_size:
+                cheak_fish.append(f)
+            else:
+                end_cnt += 1
+        if end_cnt == len(fish):
+            break
+        bfs_lst = [[0] * N for _ in range(N)]
+        result = BFS()
+        if result == 0:
+            break
+    print(time)
