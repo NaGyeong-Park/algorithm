@@ -6,7 +6,6 @@ sys.setrecursionlimit(10**7)
 T = int(input())
 
 def quad_tree(sx, sy, ex,ey):
-    global result
     cheak = 1
     for i in range(sx,ex):
         for j in range(sy,ey):
@@ -27,6 +26,5 @@ def quad_tree(sx, sy, ex,ey):
 for tc in range(1, T + 1):
     N = int(input())
     map_lst = [list(map(int, input())) for _ in range(N)]
-    result = [1]
     quad_tree(0,0,N,N)
     print()

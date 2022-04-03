@@ -18,6 +18,7 @@ def make_arr(k):
             make_arr(k + 1)
             arr.pop()
 
+            # 순열과 다른 부분
             for j in range(i+1,N):
                 visited[j] = False
 

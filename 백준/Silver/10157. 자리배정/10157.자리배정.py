@@ -1,3 +1,9 @@
+import sys
+from pprint import pprint
+sys.stdin = open('input.txt')
+
+T = int(input())
+
 def num(x,y):
     i = cnt = 0
     num = 1
@@ -22,15 +28,16 @@ def num(x,y):
             cnt = 0
         num += 1
 
-C, R = map(int,input().split())
-K = int(input())
-map_lst = [[0 for _ in range(C)] for _ in range(R)]
-direc_x = [-1,0,1,0]
-direc_y = [0,1,0,-1]
-x = R-1
-y = 0
-result = num(x,y)
-if not result:
-    print(0)
-else:
-    print(result[1]+1,R-result[0])
+for tc in range(1, T + 1):
+    C, R = map(int,input().split())
+    K = int(input())
+    map_lst = [[0 for _ in range(C)] for _ in range(R)]
+    direc_x = [-1,0,1,0]
+    direc_y = [0,1,0,-1]
+    x = R-1
+    y = 0
+    result = num(x,y)
+    if not result:
+        print(0)
+    else:
+        print(result[1]+1,R-result[0])

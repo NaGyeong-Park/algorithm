@@ -1,4 +1,4 @@
-# [Gold V] 치킨 배달 - 15686 
+# [Gold V] 치킨 배달 - 15686 - 1트><
 
 [문제 링크](https://www.acmicpc.net/problem/15686) 
 
