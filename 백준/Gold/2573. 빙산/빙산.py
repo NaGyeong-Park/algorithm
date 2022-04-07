@@ -1,5 +1,9 @@
+import sys
 import copy
 from collections import deque
+sys.stdin = open('input.txt')
+
+T = int(input())
 
 
 def BFS():
@@ -42,23 +46,24 @@ def check_piece():
     return cnt_piece
 
 
-N, M = map(int, input().split())
-arr = [0]*N
-q = deque()
-dx = [1,-1,0,0]
-dy = [0,0,1,-1]
-for i in range(N):
-    arr[i] = list(map(int, input().split()))
-result = 0
+for tc in range(1, T + 1):
+    N, M = map(int, input().split())
+    arr = [0]*N
+    q = deque()
+    dx = [1,-1,0,0]
+    dy = [0,0,1,-1]
+    for i in range(N):
+        arr[i] = list(map(int, input().split()))
+    result = 0
 
-while True:
-    check = [[True]*M for _ in range(N)]
-    piece = check_piece()
-    if piece == False:
-        result = 0
-        break
-    elif piece > 1:
-        break
-    BFS()
-    result += 1
-print(result)
+    while True:
+        check = [[True]*M for _ in range(N)]
+        piece = check_piece()
+        if piece == False:
+            result = 0
+            break
+        elif piece > 1:
+            break
+        BFS()
+        result += 1
+    print(result)
