@@ -1,4 +1,4 @@
-from itertools import permutations
+from itertools import combinations
 
 
 
@@ -44,6 +44,6 @@ for i in range(N):
             check[i][j] = True
             blank.append([i, j])
 
-blank = list(permutations(blank, 3))
+blank = list(combinations(blank, 3))
 BFS()
 print(result)
