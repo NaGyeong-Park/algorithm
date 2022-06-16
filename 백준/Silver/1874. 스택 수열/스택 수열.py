@@ -21,3 +21,35 @@ if stack or check.count(False):
     print("NO")
 else:
     print('\n'.join(result))
+
+
+
+# 다른 사람 코드
+# import sys
+#
+#
+# def makeSeq():
+#     n, *wish = map(int, sys.stdin.read().split())
+#     server = 1
+#     receiver = []
+#
+#     oper = []
+#     for w in wish:
+#         # push
+#         while server <= w:
+#             receiver.append(server)
+#             oper.append("+")
+#             server += 1
+#
+#         if receiver[-1] != w:
+#             oper = ["NO"]
+#             break
+#
+#         # pop
+#         receiver.pop()
+#         oper.append("-")
+#
+#     print("\n".join(oper))
+#
+#
+# makeSeq()
