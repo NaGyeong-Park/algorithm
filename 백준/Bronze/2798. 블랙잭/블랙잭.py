@@ -1,30 +1,16 @@
 import sys
+from itertools import combinations
 
-def back(k):
-    global answer
-    if len(temp) == 3:
-        result = sum(temp)
-        if M >= result > answer:
-            answer = result
-        return
-    elif sum(temp) > M:
-        return
-    for i in range(k,N):
-        if visited[i]:
-            continue
-        temp.append(numbers[i])
-        visited[i] = True
-        back(i+1)
-        visited[i] = False
-        temp.pop()
+def combi():
+    answer = 0
+    for lst in numbers:
+        if answer < sum(lst) <= M:
+            answer = sum(lst)
+    return answer
 
 
 N, M = map(int,sys.stdin.readline().split())
 numbers = list(map(int, sys.stdin.readline().split()))
-numbers.sort()
-visited = [False for _ in range(N)]
-answer = 0
-temp = []
-result = 0
-back(0)
-print(answer)
+numbers = list(combinations(numbers,3))
+
+print(combi())
