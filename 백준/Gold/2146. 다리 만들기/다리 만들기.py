@@ -1,7 +1,5 @@
 import sys
 from collections import deque
-from copy import deepcopy
-from pprint import pprint
 
 
 def check_island():
@@ -68,7 +66,7 @@ for i in range(N):
             start = (i, j)
             check_island()
 for i in range(abs(land_num) - 1):
-    temp_map = deepcopy(map)
+    temp_map = [row[:] for row in map]
     result = BFS(i + 1,answer)
     if result < answer:
         answer = result
